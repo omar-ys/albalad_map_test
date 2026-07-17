@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Al-Balad Interactive Map — Historic Jeddah Navigator</title>
+  <meta name="description" content="Explore the historic Al-Balad district of Jeddah with an interactive map. Navigate alleys, discover points of interest, and find walking routes through this UNESCO World Heritage Site." />
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin="" />
+
+  <!-- App CSS -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+          crossorigin=""></script>
+</head>
+<body>
+
+  <!-- Loading overlay -->
+  <div id="loading-overlay" class="loading-overlay">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">Loading Al-Balad Map…</div>
+  </div>
+
+  <!-- App container -->
+  <div id="app">
+
+    <!-- Sidebar toggle -->
+    <button id="sidebar-toggle" class="shifted" aria-label="Toggle sidebar">✕</button>
+
+    <!-- Sidebar -->
+    <aside id="sidebar">
+
+      <!-- Header -->
+      <div class="sidebar-header">
+        <h1>Al-Balad</h1>
+        <div class="subtitle">Historic Jeddah · Interactive Map</div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="explore" id="tab-explore">
+          🗺️ Explore
+        </button>
+        <button class="tab-btn" data-tab="navigate" id="tab-navigate">
+          🧭 Navigate
+        </button>
+      </div>
+
+      <!-- Explore Panel -->
+      <div class="tab-panel active" id="panel-explore">
+        <!-- Search -->
+        <div class="search-wrapper">
+          <div class="search-box">
+            <span class="icon">🔍</span>
+            <input type="text" id="search-input" placeholder="Search places…" autocomplete="off" />
+          </div>
+        </div>
+
+        <!-- Filter chips -->
+        <div class="filter-chips">
+          <button class="chip active" data-filter="all">
+            <span class="emoji">✨</span> All
+          </button>
+          <button class="chip" data-filter="res">
+            <span class="emoji">🍽️</span> Restaurant
+          </button>
+          <button class="chip" data-filter="coffe">
+            <span class="emoji">☕</span> Coffee
+          </button>
+          <button class="chip" data-filter="m">
+            <span class="emoji">🕌</span> Mosque
+          </button>
+        </div>
+
+        <!-- POI list -->
+        <div class="poi-list" id="poi-list">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+
+      <!-- Navigate Panel -->
+      <div class="tab-panel" id="panel-navigate">
+        <div class="nav-panel">
+          <!-- Origin -->
+          <div class="nav-field">
+            <label for="nav-from">📍 From</label>
+            <select id="nav-from">
+              <option value="">Select starting point…</option>
+            </select>
+          </div>
+
+          <!-- Swap button -->
+          <button class="swap-btn" id="swap-btn" aria-label="Swap origin and destination" title="Swap">⇅</button>
+
+          <!-- Destination -->
+          <div class="nav-field">
+            <label for="nav-to">🏁 To</label>
+            <select id="nav-to">
+              <option value="">Select destination…</option>
+            </select>
+          </div>
+
+          <!-- Navigate button -->
+          <button class="navigate-btn" id="navigate-btn">
+            Find Route
+          </button>
+
+          <!-- Clear route -->
+          <button class="clear-route-btn" id="clear-route-btn">
+            ✕ Clear Route
+          </button>
+
+          <!-- Route result -->
+          <div class="route-result" id="route-result">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- Map -->
+    <div id="map"></div>
+
+  </div>
+
+  <!-- App JS -->
+  <script src="app.js"></script>
+
+</body>
+</html>

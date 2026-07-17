@@ -1,0 +1,12 @@
+{
+"type": "FeatureCollection",
+"name": "POI_v1",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{"type":"Feature","properties":{"poi_id":1,"name":"Almuallimi","type":"res"},"geometry":{"type":"Point","coordinates":[39.185514762140947,21.486211382683312]}},
+{"type":"Feature","properties":{"poi_id":2,"name":"ff","type":"coffe"},"geometry":{"type":"Point","coordinates":[39.186557092030498,21.486428398378941]}},
+{"type":"Feature","properties":{"poi_id":3,"name":"mo","type":"m"},"geometry":{"type":"Point","coordinates":[39.186209947738526,21.486081173110623]}},
+{"type":"Feature","properties":{"poi_id":4,"name":"m","type":"m"},"geometry":{"type":"Point","coordinates":[39.185834996022678,21.486703840911272]}},
+{"type":"Feature","properties":{"poi_id":5,"name":"re","type":"rest"},"geometry":{"type":"Point","coordinates":[39.186012604730188,21.48629985835213]}}
+]
+}
