@@ -55,6 +55,12 @@
       maxZoom: 22,
     });
 
+    //google satellite map 
+    const googleSatelliteMap = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
+      attribution: '&copy; <a href="https://www.google.com/maps/">Google Maps</a>',
+      maxZoom: 22,
+    });
+
     // Add dark map as default
     darkMap.addTo(map);
 
@@ -63,6 +69,7 @@
       '🌑 Dark': darkMap,
       '☀️ Light': lightMap,
       '🛰️ Satellite': satelliteMap,
+      '🛰️ Google Satellite': googleSatelliteMap,
     };
 
     L.control.layers(baseMaps, null, {

@@ -988,8 +988,7 @@ html, body {
   }
 
   #sidebar-toggle.shifted {
-    left: calc(100% - 28px);
-    max-left: 400px;
+    left: min(calc(100% - 28px), 400px);
   }
 }
 
