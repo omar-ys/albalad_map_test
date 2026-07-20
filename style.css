@@ -1031,3 +1031,67 @@ html, body {
 .no-results p {
   font-size: 13px;
 }
+
+/* ---------- Road Legend ---------- */
+.road-legend {
+  position: absolute;
+  bottom: 28px;
+  right: 14px;
+  z-index: 1000;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 12px 16px;
+  min-width: 148px;
+  box-shadow: var(--shadow-lg);
+  font-size: 12px;
+  color: var(--text-secondary);
+  pointer-events: none;
+}
+
+.road-legend .legend-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  margin-bottom: 9px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 5px;
+  line-height: 1;
+}
+
+.legend-item:last-child {
+  margin-bottom: 0;
+}
+
+.legend-line {
+  display: inline-block;
+  width: 28px;
+  height: 3px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* Colors must match FCLASS_STYLES in app.js */
+.legend-line.primary-road     { background: #f9a825; height: 5px; }
+.legend-line.secondary-road   { background: #ff8a65; height: 4px; }
+.legend-line.tertiary-road    { background: #aed581; height: 3px; }
+.legend-line.residential-road { background: #4fc3f7; height: 2.5px; }
+.legend-line.service-road     { background: #80cbc4; height: 2px;
+  background-image: repeating-linear-gradient(to right, #80cbc4 0, #80cbc4 4px, transparent 4px, transparent 7px); }
+.legend-line.pedestrian-road  { background: #ce93d8; height: 2.5px;
+  background-image: repeating-linear-gradient(to right, #ce93d8 0, #ce93d8 8px, transparent 8px, transparent 12px); }
+.legend-line.footway-road     { background: #f48fb1; height: 2px;
+  background-image: repeating-linear-gradient(to right, #f48fb1 0, #f48fb1 4px, transparent 4px, transparent 8px); }
+.legend-line.steps-road       { background: #ffcc02; height: 2px;
+  background-image: repeating-linear-gradient(to right, #ffcc02 0, #ffcc02 2px, transparent 2px, transparent 6px); }

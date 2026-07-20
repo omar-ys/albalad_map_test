@@ -87,7 +87,7 @@
   // ─── Load GeoJSON Data ───────────────────────────────────
   async function loadData() {
     const [alleyRes, poiRes] = await Promise.all([
-      fetch('Allew_v2.geojson'),
+      fetch('Allew_v3.geojson'),
       fetch('POI_v1.geojson'),
     ]);
 
@@ -103,19 +103,29 @@
   }
 
   // ─── Render Alley/Road Layer ─────────────────────────────
+  // Road class style definitions for Allew_v3.geojson (OSM fclass field)
+  const FCLASS_STYLES = {
+    primary:      { color: '#f9a825', weight: 5,   opacity: 0.90, dashArray: null },
+    primary_link: { color: '#f9a825', weight: 4,   opacity: 0.80, dashArray: null },
+    secondary:    { color: '#ff8a65', weight: 4,   opacity: 0.85, dashArray: null },
+    tertiary:     { color: '#aed581', weight: 3,   opacity: 0.80, dashArray: null },
+    residential:  { color: '#4fc3f7', weight: 2.5, opacity: 0.70, dashArray: null },
+    service:      { color: '#80cbc4', weight: 1.8, opacity: 0.60, dashArray: '4 3' },
+    pedestrian:   { color: '#ce93d8', weight: 2.5, opacity: 0.75, dashArray: '8 4' },
+    footway:      { color: '#f48fb1', weight: 1.5, opacity: 0.65, dashArray: '4 4' },
+    steps:        { color: '#ffcc02', weight: 2,   opacity: 0.70, dashArray: '2 4' },
+    _default:     { color: '#78909c', weight: 2,   opacity: 0.55, dashArray: '6 4' },
+  };
+
+  function getRoadStyle(feature) {
+    const fclass = (feature.properties.fclass || '').toLowerCase();
+    const style = FCLASS_STYLES[fclass] || FCLASS_STYLES._default;
+    return Object.assign({ lineCap: 'round', lineJoin: 'round' }, style);
+  }
+
   function renderAlleyLayer(geojson) {
     alleyLayer = L.geoJSON(geojson, {
-      style: function (feature) {
-        const isRoad = feature.properties.Name && feature.properties.Name.toLowerCase() === 'road';
-        return {
-          color: isRoad ? '#f9a825' : '#4fc3f7',
-          weight: isRoad ? 4 : 2.5,
-          opacity: isRoad ? 0.85 : 0.55,
-          dashArray: isRoad ? null : '6 4',
-          lineCap: 'round',
-          lineJoin: 'round',
-        };
-      },
+      style: getRoadStyle,
       onEachFeature: function (feature, layer) {
         layer.on('mouseover', function () {
           this.setStyle({
@@ -127,8 +137,11 @@
           alleyLayer.resetStyle(this);
         });
 
-        const name = feature.properties.Name || 'Unnamed';
-        layer.bindTooltip(name, {
+        // Build tooltip: show name + road class
+        const name = feature.properties.name || null;
+        const fclass = feature.properties.fclass || 'road';
+        const label = name ? `${name} <em>(${fclass})</em>` : `<em>${fclass}</em>`;
+        layer.bindTooltip(label, {
           className: 'alley-tooltip',
           direction: 'top',
           offset: [0, -8],
